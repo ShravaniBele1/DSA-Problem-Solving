@@ -1,0 +1,94 @@
+import java.io.*;
+import java.util.*;
+
+class SinglyLinkedListNode {
+    int data;
+    SinglyLinkedListNode next;
+    
+    SinglyLinkedListNode(int data){
+        this.data = data;
+        this.next = null;
+    }
+}
+
+public class Solution{
+    
+    //merge function
+    static SinglyLinkedListNode mergeLists(SinglyLinkedListNode headA, SinglyLinkedListNode headB)
+    {
+        if(headA == null)
+            return headB;
+        if(headB == null)
+            return headA;
+            
+        SinglyLinkedListNode dummy = new SinglyLinkedListNode(0);
+        SinglyLinkedListNode current = dummy;
+    
+        while(headA != null && headB != null)
+        {
+            if(headA.data <= headB.data){
+                current.next = headA;
+                headA = headA.next;
+            }
+            else{
+                current.next = headB;
+                headB = headB.next;
+            }
+            current = current.next;
+        }
+        
+        if(headA != null)
+            current.next = headA;
+        else
+            current.next = headB;
+    
+        return dummy.next;
+    }
+    
+    // Create linked list from input
+    static SinglyLinkedListNode createList(Scanner sc,int n){
+         SinglyLinkedListNode head = null,tail = null;
+        for(int i=0 ; i<n ;i++){
+            int val = sc.nextInt();
+            SinglyLinkedListNode node = new SinglyLinkedListNode(val);
+            
+            if(head == null){
+                head = node;
+                tail = node;
+            }
+            else{
+                tail.next = node;
+                tail = tail.next;
+            }
+        }
+        return head;
+    }
+    
+    //print linked list
+    static void printList(SinglyLinkedListNode head){
+        while(head != null){
+            System.out.print(head.data + " ");
+            head = head.next;
+        }
+        System.out.println();
+    }
+    
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        
+        int t = sc.nextInt();
+        
+        while(t-- >0 ){
+            int n1 = sc.nextInt();
+            SinglyLinkedListNode headA = createList(sc,n1);
+            
+            int n2 = sc.nextInt();
+            SinglyLinkedListNode headB = createList(sc, n2);
+            
+            SinglyLinkedListNode result = mergeLists(headA , headB);
+            
+            printList(result);
+        }
+    }
+    
+}
