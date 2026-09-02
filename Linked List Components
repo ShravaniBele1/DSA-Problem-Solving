@@ -1,0 +1,27 @@
+class Solution {
+    public int numComponents(ListNode head, int[] nums) {
+        
+        Set<Integer> set = new HashSet<>();
+
+        for(int num : nums){
+            set.add(num);
+        } 
+
+        ListNode current = head ;
+        int count = 0;
+
+        while(current != null){
+
+            if(set.contains(current.val)){
+
+                if(current.next == null || !set.contains(current.next.val)){
+                    count++ ;
+                }
+            }
+
+            current = current.next ;
+        }
+
+        return count ;
+    }
+}
