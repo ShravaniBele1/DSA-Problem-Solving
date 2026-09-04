@@ -1,0 +1,44 @@
+class Solution {
+    public ListNode removeNodes(ListNode head) {
+
+        // Step 1: Reverse the linked list
+        head = reverse(head);
+
+        // Step 2: Keep track of maximum value
+        int max = head.val;
+        ListNode current = head;
+
+        // Step 3: Remove nodes smaller than max
+        while (current != null && current.next != null) {
+
+            if (current.next.val < max) {
+                current.next = current.next.next;
+            } 
+            else {
+                current = current.next;
+                max = current.val;
+            }
+        }
+
+        // Step 4: Reverse again to get original order
+        return reverse(head);
+    }
+
+    private ListNode reverse(ListNode head) {
+
+        ListNode prev = null;
+        ListNode current = head;
+
+        while (current != null) {
+
+            ListNode next = current.next;
+
+            current.next = prev;
+
+            prev = current;
+            current = next;
+        }
+
+        return prev;
+    }
+}
