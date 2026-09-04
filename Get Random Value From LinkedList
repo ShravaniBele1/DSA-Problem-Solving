@@ -1,0 +1,31 @@
+class Solution {
+
+    ListNode head;
+    Random random;
+
+    public Solution(ListNode head) {
+        this.head = head;
+        this.random = new Random();
+    }
+    
+    public int getRandom() {
+        
+        ListNode current = head;
+
+        int count = 0;
+        int result = 0;
+
+        while(current != null){
+
+            count++ ;
+
+            if(random.nextInt(count) == 0){
+                result = current.val ;
+            }
+
+            current = current.next ;
+        }
+
+        return result ;
+    }
+}
