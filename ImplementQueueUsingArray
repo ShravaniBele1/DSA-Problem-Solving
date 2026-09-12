@@ -1,0 +1,83 @@
+class MyQueue{
+	
+	int[] queue;
+	int capacity;
+	int front;
+	int rear ;
+	
+	MyQueue(int size){
+		capacity = size;
+		queue = new int[capacity];
+		front = 0 ;
+		rear = 0 ;
+	}
+	
+	void offer(int value) {
+		
+		if(rear == capacity) {
+		   System.out.println("Queue Overflow");
+		}
+		
+		queue[rear] = value;
+		rear++ ;
+	}
+	
+	int poll() {
+		
+		if(front == rear ){
+			System.out.println("Queue Underflow");
+			return -1;
+		}
+		
+		int value = queue[front];
+		front++ ;
+		
+		return value ;
+	}
+	
+	int peek() {
+		
+		if(front == rear ){
+			System.out.println("Queue Underflow");
+			return -1;
+		}
+		
+		int value = queue[front];
+		
+		return value ;
+	}
+	
+	boolean isEmpty() {
+		return front == rear ;
+	}
+	
+	void displayQueue() {
+		
+		for(int i = front ; i < rear ; i++) {
+			System.out.println(queue[i]);
+		}
+	}
+}
+
+public class ImplementQueueUsingArray {
+
+	public static void main(String[] args) {
+		
+		MyQueue q = new MyQueue(5);
+		
+		q.offer(10);
+		q.offer(20);
+		q.offer(30);
+		
+		q.displayQueue();
+		
+		System.out.println("Polled : "+ q.poll());
+		
+		System.out.println("peek : "+ q.peek());
+		
+		System.out.println("Display Queue :");
+		q.displayQueue();
+		
+	}
+
+}
